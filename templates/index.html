@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+    <br/>
+
+    {% if tasks|length < 1 %} 
+        <h3>There are no tasks to be completed </h3>
+
+    {% else %}
+
+    {% for task in tasks %} 
+        <p>{{task.content}}</p>
+        <p>{{task.date_created.date()}}</p>
+        <a href="/delete/{{task.id}}">delete</a>
+        <a href="/update/{{task.id}}">update</a>
+
+    {% endfor %}
+
+    {% endif %}
+
+
+
+    <form action="/" method="POST">
+        <input type="text" name="content" id=""content">
+        <input type="submit" value="Add task">
+    </form>
+    {% endblock %}
+</body>
+</html>
